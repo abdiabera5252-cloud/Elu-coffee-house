@@ -614,8 +614,8 @@
             btnSubmitFb: "Send Feedback",
             btnSending: "Sending...",
             categories: {
-               all : "All Items",
-               cultural_food : "Cultural Foods",
+               all: "All Items",
+               cultural_food: "Cultural Foods",
                breakfast: "Breakfast",
                hot_beverage: "Hot Beverages",
                 soft_drink: "Soft Drinks"
@@ -655,7 +655,7 @@
             btnSubmitFb: "አስተያየት ላክ",
             btnSending: "እየላከ ነው...",
             categories: {
-                all: "ሁሉም",
+                all : "ሁሉም",
                 cultural_food : "ባህላዊ ምግቦች",
                breakfast: "ቁርስ",
                hot_beverage : "ትኩስ",
@@ -743,7 +743,7 @@
     function renderCategories() {
         const catContainer = document.getElementById('categories-wrapper');
         const catMap = translations[currentLang].categories;
-        const keys = ['  all', ' cultural_food', 'breakfast', 'hot_beverage', 'soft_drink'];
+        const keys = [ 'all', 'cultural_food', 'breakfast', 'hot_beverage', 'soft_drink'];
         
         catContainer.innerHTML = keys.map(key => {
             const label = catMap[key] || key;
