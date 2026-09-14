@@ -614,11 +614,11 @@
             btnSubmitFb: "Send Feedback",
             btnSending: "Sending...",
             categories: {
-               ሁሉም : "All Items",
-                ባህላዊ ምግቦች: "Cultural Foods",
-               ቁርስ: "Breakfast",
-                ትኩስ: "Hot Beverages",
-                ለስላሳ መጠጦች: "Soft Drinks"
+               all : "All Items",
+               cultural_food : "Cultural Foods",
+               breakfast: "Breakfast",
+               hot_beverage: "Hot Beverages",
+                soft_drink: "Soft Drinks"
                 
             },
             viewCart: "View Order",
@@ -655,11 +655,11 @@
             btnSubmitFb: "አስተያየት ላክ",
             btnSending: "እየላከ ነው...",
             categories: {
-                ሁሉም: "all",
-               ባህላዊ ምግቦች : "Cultural Foods",
-               ቁርስ : "Breakfast",
-               ትኩስ : "Hot Beverages",
-               ለስላሳ መጠጦች : "Soft Drinks"
+                all: "ሁሉም",
+                cultural_food : "ባህላዊ ምግቦች",
+               breakfast: "ቁርስ",
+               hot_beverage : "ትኩስ",
+              soft_drink  : "ለስላሳ መጠጦች"
                 
             },
             viewCart: "ትዕዛዝ ይመልከቱ",
@@ -743,7 +743,7 @@
     function renderCategories() {
         const catContainer = document.getElementById('categories-wrapper');
         const catMap = translations[currentLang].categories;
-        const keys = ['ሁሉም', 'ባህላዊ ምግቦች', 'ቁርስ', 'ትኩስ', 'ለስላሳ መጠጦች'];
+        const keys = ['  all', ' cultural_food', 'breakfast', 'hot_beverage', 'soft_drink'];
         
         catContainer.innerHTML = keys.map(key => {
             const label = catMap[key] || key;
