@@ -615,11 +615,11 @@
             btnSending: "Sending...",
             categories: {
                 all: "All Items",
-                carbohydrate: "Carbohydrate",
-                protein: "Protein",
-                protein_shake: "Protein Shake",
-                calcium: "Calcium",
-                vitamin: "Vitamin"
+                ባህላዊ ምግቦች: "Cultural Foods",
+               ቁርስ: "Breakfast",
+                ትኩስ: "Hot Beverages",
+                ለስላሳ መጠጦች: "Soft Drinks"
+                
             },
             viewCart: "View Order",
             cartTitle: "Your Order",
@@ -656,11 +656,11 @@
             btnSending: "እየላከ ነው...",
             categories: {
                 all: "ሁሉም",
-                carbohydrate: "ካርቦሃይድሬት",
-                protein: "ፕሮቲን",
-                protein_shake: "ፕሮቲን ሼክ",
-                calcium: "ካልሲየም",
-                vitamin: "ቫይታሚን"
+                Cultural Foods: "ባህላዊ ምግቦች",
+                Breakfast: "ቁርስ",
+                Hot Beverages: "ትኩስ",
+                Soft Drinks: "ለስላሳ መጠጦች"
+                
             },
             viewCart: "ትዕዛዝ ይመልከቱ",
             cartTitle: "የእርስዎ ትዕዛዝ",
@@ -743,7 +743,7 @@
     function renderCategories() {
         const catContainer = document.getElementById('categories-wrapper');
         const catMap = translations[currentLang].categories;
-        const keys = ['all', 'carbohydrate', 'protein', 'protein_shake', 'calcium', 'vitamin'];
+        const keys = ['all', 'ባህላዊ ምግቦች', 'ቁርስ', 'ትኩስ', 'ለስላሳ መጠጦች'];
         
         catContainer.innerHTML = keys.map(key => {
             const label = catMap[key] || key;
