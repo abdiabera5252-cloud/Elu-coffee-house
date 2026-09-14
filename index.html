@@ -3,317 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELU-COFFEE-HOUSE - Digital Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Elu-Coffee-House - Digital Menu</title>
     <style>
         :root {
             --bg-color: #121212;
             --surface-color: #1e1e1e;
+            --surface-hover: #2a2a2a;
             --accent-color: #c5a880;
-            --text-main: #ffffff;
+            --text-main: #f5f5f5;
             --text-muted: #a0a0a0;
-            --border-color: rgba(255,255,255,0.05);
-            --star-color: #ffd700;
+            --border-color: #333333;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding: 15px;
             display: flex;
             justify-content: center;
+            padding: 15px;
+            min-height: 100vh;
         }
 
         .menu-container {
             width: 100%;
             max-width: 480px;
-            background: var(--surface-color);
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-            border: 1px solid var(--border-color);
+            padding-bottom: 90px;
+            position: relative;
         }
 
-        .lang-switch-container {
+        /* Language Switcher */
+        .lang-switch-wrapper {
+            position: absolute;
+            top: 10px;
+            right: 10px;
             display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
+            gap: 4px;
+            background: var(--surface-color);
+            padding: 3px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            z-index: 10;
         }
 
         .lang-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            padding: 4px 10px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        .lang-btn:hover {
+        .lang-btn.active {
             background: var(--accent-color);
             color: #121212;
         }
 
+        /* Header */
         .header {
             text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
-            padding-bottom: 15px;
+            margin-top: 15px;
+            margin-bottom: 20px;
         }
 
-        .logo-wrapper {
+        .logo-wrapper img {
             width: 80px;
             height: 80px;
-            margin: 0 auto 12px;
             border-radius: 50%;
-            border: 2px solid var(--accent-color);
-            padding: 4px;
-            background: rgba(255,255,255,0.02);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .brand-logo {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
-            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            margin-bottom: 10px;
         }
 
         .header h1 {
-            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
             color: var(--accent-color);
-            font-size: 2.4rem;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .header p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin-top: 2px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
+        /* Payment Nav Bar */
         .nav-payment-bar {
-            background: rgba(255,255,255,0.03);
+            background: var(--surface-color);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 12px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            padding: 10px 14px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
         .nav-payment-title {
             font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: 600;
             color: var(--text-muted);
         }
 
         .payment-icons {
             display: flex;
-            gap: 8px;
-            align-items: center;
+            gap: 6px;
         }
 
         .payment-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            text-decoration: none;
-        }
-
-        .payment-badge:hover {
-            transform: translateY(-1px);
-        }
-
-        .badge-telebirr {
-            background: rgba(0, 136, 204, 0.2);
-            color: #38b6ff;
-            border: 1px solid rgba(0, 136, 204, 0.4);
-        }
-
-        .badge-cbe {
-            background: rgba(139, 29, 131, 0.2);
-            color: #e066ff;
-            border: 1px solid rgba(139, 29, 131, 0.4);
-        }
-
-        .badge-info {
-            background: rgba(197, 168, 128, 0.15);
-            color: var(--accent-color);
-            border: 1px solid rgba(197, 168, 128, 0.3);
-        }
-
-        .categories {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 25px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .categories::-webkit-scrollbar {
-            height: 4px;
-        }
-        .categories::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 10px;
-        }
-
-        .tab {
-            background: rgba(255,255,255,0.03);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-        }
-
-        .tab.active, .tab:hover {
-            background: var(--accent-color);
-            color: #121212;
-            font-weight: 600;
-            border-color: var(--accent-color);
-            box-shadow: 0 4px 12px rgba(197, 168, 128, 0.3);
-        }
-
-        .menu-list {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .menu-item {
-            display: flex;
-            flex-direction: column;
-            background: rgba(255,255,255,0.02);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        .item-image-container {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            background: rgba(0,0,0,0.2);
-        }
-
-        .item-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .menu-item:hover .item-image {
-            transform: scale(1.05);
-        }
-
-        .item-details {
-            padding: 16px;
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-
-        .item-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-main);
-            padding-right: 10px;
-        }
-
-        .item-price {
-            color: var(--accent-color);
-            font-weight: 600;
-            font-size: 1.1rem;
-            white-space: nowrap;
-            background: rgba(197, 168, 128, 0.1);
-            padding: 2px 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
             border-radius: 6px;
+            cursor: pointer;
         }
 
-        .item-description {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
+        .badge-telebirr { background: #0088cc; color: #fff; }
+        .badge-cbe { background: #7b1fa2; color: #fff; }
+        .badge-info { background: var(--surface-hover); color: var(--accent-color); border: 1px solid var(--border-color); }
 
+        /* Feedback Bar */
         .feedback-bar {
-            margin-bottom: 20px;
-            background: rgba(197, 168, 128, 0.05);
-            border: 1px dashed rgba(197, 168, 128, 0.3);
-            border-radius: 16px;
-            padding: 12px;
+            background: rgba(197, 168, 128, 0.08);
+            border: 1px dashed var(--accent-color);
+            border-radius: 12px;
+            padding: 10px 14px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        .feedback-text {
+        .feedback-text strong {
+            display: block;
             font-size: 0.85rem;
-            color: var(--text-main);
+            color: var(--accent-color);
         }
 
         .feedback-btn {
             background: var(--accent-color);
             color: #121212;
             border: none;
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        /* Tabs */
+        .categories {
+      display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 4px;
+        }
+
+        .categories::-webkit-scrollbar { display: none; }
+
+        .tab {
+            background: var(--surface-color);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab.active {
+            background: var(--accent-color);
+            color: #121212;
+            border-color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Menu List */
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-item {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            transition: background 0.2s ease;
+        }
+
+        .item-image-container {
+            width: 75px;
+            height: 75px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #252525;
+        }
+
+        .item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 4px;
+        }
+
+        .item-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .item-price {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent-color);
             white-space: nowrap;
         }
 
-        .feedback-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
+        .item-description {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.3;
         }
 
+        .item-action-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cart-btn-ctrl {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 168, 128, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 2px 8px;
+        }
+
+        .qty-btn {
+            background: transparent;
+            border: none;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+
+        .add-cart-btn {
+            background: var(--accent-color);
+            color: #121212;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        /* Footer */
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-note p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .dev-credit {
+            display: inline-block;
+            margin-top: 6px;
+            font-size: 0.7rem;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Modal Overlays */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(4px);
             display: none;
             justify-content: center;
@@ -330,6 +344,7 @@
             max-width: 400px;
             padding: 20px;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .modal-close {
@@ -343,54 +358,48 @@
             cursor: pointer;
         }
 
-        .payment-row {
+        /* Copyable Payment Card Styles */
+        .copy-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.1s ease, background 0.2s ease;
         }
 
-        .payment-row:last-child {
-            border-bottom: none;
+        .copy-card:active {
+            transform: scale(0.98);
         }
 
+        .copy-btn-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            pointer-events: none;
+        }
+
+        /* Rating Stars */
         .star-rating {
             display: flex;
             gap: 8px;
             justify-content: center;
             margin: 15px 0;
-            font-size: 1.8rem;
-            cursor: pointer;
         }
 
         .star {
-            color: #444444;
+            font-size: 1.8rem;
+            color: #444;
+            cursor: pointer;
             transition: color 0.2s ease;
         }
 
-        .star.selected, .star:hover {
-            color: var(--star-color);
-        }
-
-        .feedback-textarea {
-            width: 100%;
-            height: 90px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-main);
-            padding: 10px;
-            font-family: inherit;
-            font-size: 0.85rem;
-            resize: none;
-            margin-bottom: 15px;
-            outline: none;
-        }
-
-        .feedback-textarea:focus {
-            border-color: var(--accent-color);
-        }
+        .star.selected { color: #ffb400; }
 
         .submit-btn {
             width: 100%;
@@ -399,347 +408,543 @@
             border: none;
             padding: 12px;
             border-radius: 12px;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 0.9rem;
             cursor: pointer;
+            margin-top: 10px;
         }
 
-        .footer-note {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
+            color: #121212;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2000;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            animation: fadeInOut 2s ease forwards;
         }
 
-        .dev-credit {
-            color: var(--accent-color) !important;
-            font-weight: 600;
-            margin-top: 8px;
-            display: block;
-            text-decoration: none;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -10px); }
+            15% { opacity: 1; transform: translate(-50%, 0); }
+            85% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, -10px); }
         }
     </style>
 </head>
 <body>
 
-    <div class="menu-container">
-        <div class="lang-switch-container">
-            <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">🇬🇧 English</button>
+<!-- Toast Notification -->
+<div id="toast" class="toast-notification">Copied to clipboard!</div>
+
+<div class="menu-container">
+    <!-- Language Switcher -->
+    <div class="lang-switch-wrapper">
+        <button class="lang-btn active" id="btn-en" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" id="btn-am" onclick="setLanguage('am')">አማ</button>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-wrapper">
+            <img src="https://tse2.mm.bing.net/th/id/OIP.aAJb1wg_JDeWsQLkd_xz_QHaFD?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Brand Logo">
         </div>
+        <h1>Nehase 7 Fresh Milk</h1>
+        <p id="txt-subhead">Premium Digital Menu</p>
+    </div>
 
-        <div class="header">
-            <div class="logo-wrapper">
-                <img src="elu logo.jpg" alt="ELU Logo" class="brand-logo" onerror="this.src='https://via.placeholder.com/80?text=ELU'">
-            </div>
-            <h1>ELU-COFFEE-HOUSE</h1>
-            <p id="subHeaderTitle">የዲጂታል ሜኑ አገልግሎት</p>
-        </div>
-
-        <div class="nav-payment-bar">
-            <span class="nav-payment-title" id="paymentTitle">የክፍያ አማራጮች</span>
-            <div class="payment-icons">
-                <span class="payment-badge badge-telebirr" onclick="togglePaymentModal()">telebirr</span>
-                <span class="payment-badge badge-cbe" onclick="togglePaymentModal()">CBE</span>
-                <span class="payment-badge badge-info" onclick="togglePaymentModal()" id="badgeInfo">መረጃ</span>
-            </div>
-        </div>
-
-        <div class="feedback-bar">
-            <div class="feedback-text">
-                <strong id="fbTitle">ቆይታዎ እንዴት ነበር?</strong>
-                <div id="fbSub" style="font-size: 0.75rem; color: var(--text-muted);">የኤሉ ካፌን አገልግሎት ከፍ ለማድረግ ሀሳብዎን ያጋሩ</div>
-            </div>
-            <button class="feedback-btn" id="fbBtn" onclick="toggleFeedbackModal()">አስተያየትዎን ይስጡን</button>
-        </div>
-
-        <div class="categories" id="categoryContainer">
-            <button class="tab active" data-cat="all" onclick="filterMenu('all', this)">ሁሉም</button>
-            <button class="tab" data-cat="ባህላዊ ምግቦች" onclick="filterMenu('ባህላዊ ምግቦች', this)">ባህላዊ ምግቦች</button>
-            <button class="tab" data-cat="ቁርስ" onclick="filterMenu('ቁርስ', this)">ቁርስ</button>
-            <button class="tab" data-cat="ትኩስ" onclick="filterMenu('ትኩስ', this)">ትኩስ</button>
-            <button class="tab" data-cat="ለስላሳ መጠጦች" onclick="filterMenu('ለስላሳ መጠጦች', this)">ለስላሳ መጠጦች</button>
-        </div>
-
-        <div class="menu-list" id="menu-list"></div>
-
-        <div class="footer-note">
-            <p id="warnHeading">ያልበሰሉ ምግቦች ማሳሰቢያ፡</p>
-            <div class="dev-credit" id="warnBody" style="font-weight: 300; font-size: 0.72rem;">"ያልበሰሉ ወይም በደንብ ያልተጠበሱ ሥጋዎች፣ የባህር ምግቦች ወይም እንቁላሎችን መመገብ ለምግብ ወለድ በሽታዎች ሊያጋልጥ ይችላል።"</div>
-            <p id="injeraHeading" style="margin-top: 10px;">ስለ እንጀራ መረጃ፡</p>     
-            <div class="dev-credit" id="injeraBody" style="font-weight: 300; font-size: 0.72rem;">"ኢትዮጵያውያን ለሺህ ዓመታት እንጀራን እንደ ዋና ምግብ ሲጠቀሙ ቆይተዋል። ከጤፍ ዱቄት የሚዘጋጅ ሲሆን፣ እንደ ሳህን እና መመገቢያ ቁሳቁስም ያገለግላል።"</div>   
-            <p id="vatNotice" style="margin-top: 10px;">ዋጋዎች ሰርቪስ ቻርጅ እና ቫትን ያካተቱ ናቸው።</p>
-            <p id="devNotice" style="margin-top: 10px;">የሜኑ ዲዛይን እና ሶፍትዌር ስራ፡</p>
-            <a href="tel:+251925256424" class="dev-credit">DESIGNED BY ABDI ABERA | +251925256424</a>
+    <!-- Navigation Bar: Payment Options -->
+    <div class="nav-payment-bar">
+        <span class="nav-payment-title" id="txt-payments-title">Accepted Payments</span>
+        <div class="payment-icons">
+            <span class="payment-badge badge-telebirr" onclick="togglePaymentModal()">telebirr</span>
+            <span class="payment-badge badge-cbe" onclick="togglePaymentModal()">CBE</span>
+            <span class="payment-badge badge-info" id="txt-badge-info" onclick="togglePaymentModal()">Info</span>
         </div>
     </div>
 
-    <!-- Payment Options Modal -->
-    <div class="modal-overlay" id="paymentModal" onclick="closeModalOnOverlay(event, 'paymentModal')">
-        <div class="modal-card">
-            <button class="modal-close" onclick="togglePaymentModal()">&#10005;</button>
-            <h3 style="color: var(--accent-color); margin-bottom: 15px;" id="pmHeading">የክፍያ አማራጮች</h3>
-            
-            <div class="payment-row">
+    <!-- Feedback Bar -->
+    <div class="feedback-bar">
+        <div class="feedback-text">
+            <strong id="txt-fb-title">How was your experience?</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted);" id="txt-fb-sub">Help us improve Nehase 7 Fresh Milk</div>
+        </div>
+        <button class="feedback-btn" id="btn-fb" onclick="toggleFeedbackModal()">Leave Feedback</button>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="categories" id="categories-wrapper"></div>
+
+    <!-- Dynamic Menu List -->
+    <div class="menu-list" id="menu-list"></div>
+
+    <!-- Footer -->
+    <div class="footer-note">
+        <p id="txt-vat">Prices include service charge & VAT.</p>
+        <a href="tel:+251925256424" class="dev-credit">Designed by Abdi Abera | +251925256424</a>
+    </div>
+</div>
+
+<!-- Floating Cart Bar -->
+<div id="cartBar" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); width:90%; max-width:440px; background:var(--accent-color); color:#121212; border-radius:30px; padding:12px 20px; box-shadow:0 10px 25px rgba(0,0,0,0.5); justify-content:space-between; align-items:center; z-index:900; font-weight:600; cursor:pointer;" onclick="toggleCartModal()">
+    <div style="display:flex; align-items:center; gap:10px;">
+        <span id="cartCountBadge" style="background:#121212; color:#fff; padding:2px 8px; border-radius:12px; font-size:0.85rem;">0</span>
+        <span id="txt-view-cart">View Order</span>
+    </div>
+    <div id="cartTotalHeader" style="font-size:1.1rem;">0 ETB</div>
+</div>
+
+<!-- Cart Modal Drawer -->
+<div class="modal-overlay" id="cartModal">
+    <div class="modal-card" style="max-height:85vh; overflow-y:auto;">
+        <button class="modal-close" onclick="toggleCartModal()">&#10005;</button>
+        <h3 style="color: var(--accent-color); margin-bottom: 15px;" id="txt-cart-title">Your Order</h3>
+        
+        <div id="cartItemsList" style="display:flex; flex-direction:column; gap:12px; margin-bottom:15px; max-height:220px; overflow-y:auto; border-bottom:1px solid var(--border-color); padding-bottom:10px;"></div>
+        
+        <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:600; font-size:1.1rem;">
+            <span id="txt-total-lbl">Total Price:</span>
+            <span id="cartGrandTotal" style="color:var(--accent-color)">0 ETB</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:15px;">
+            <input type="text" id="orderTable" placeholder="Table Number / Room" style="background:rgba(255,255,255,0.03); border:1px solid var(--border-color); border-radius:10px; padding:10px; color:#fff;" />
+            <input type="tel" id="orderPhone" placeholder="Phone Number (Optional)" style="background:rgba(255,255,255,0.03); border:1px solid var(--border-color); border-radius:10px; padding:10px; color:#fff;" />
+            <select id="orderPaymentMethod" style="background:var(--surface-color); border:1px solid var(--border-color); border-radius:10px; padding:10px; color:#fff;">
+                <option value="Cash / Table">Pay Cash at Table</option>
+                <option value="Telebirr">Telebirr (0918338337)</option>
+                <option value="CBE Bank">CBE Bank (1000377773679)</option>
+            </select>
+        </div>
+
+        <button class="submit-btn" id="btn-submit-order" onclick="submitOrder()">Place Order via Telegram</button>
+    </div>
+</div>
+
+<!-- Payment Info Modal (With Copy Functionality) -->
+<div class="modal-overlay" id="paymentModal">
+    <div class="modal-card">
+        <button class="modal-close" onclick="togglePaymentModal()">&#10005;</button>
+        <h3 style="color: var(--accent-color); margin-bottom: 15px;" id="txt-modal-pay-title">Payment Options (Zelalem Abera Shanika)</h3>
+        
+        <div style="display:flex; flex-direction:column; gap:12px; font-size:0.85rem;">
+            <!-- Telebirr Copy Card -->
+            <div class="copy-card" style="background:rgba(0,136,204,0.1); border:1px solid #0088cc;" onclick="copyToClipboard('0918338337', 'Telebirr number')">
                 <div>
-                    <strong style="color: #38b6ff;">Telebirr / CBE Birr</strong>
-                    <div style="font-size:0.8rem; color:var(--text-muted);" id="pmPhone">ስልክ ቁጥር</div>
+                    <strong style="color:#0088cc;">Telebirr</strong>
+                    <div style="margin-top:4px;"><span id="txt-lbl-phone">Phone Number</span>: <strong>0918338337</strong></div>
                 </div>
-                <div style="font-weight:600;">+251925256424</div>
+                <span class="copy-btn-badge" id="btn-copy-1">Copy</span>
             </div>
 
-            <div class="payment-row">
+            <!-- CBE Copy Card -->
+            <div class="copy-card" style="background:rgba(123,31,162,0.1); border:1px solid #7b1fa2;" onclick="copyToClipboard('1000377773679', 'CBE Account')">
                 <div>
-                    <strong style="color: #e066ff;">CBE Bank</strong>
-                    <div style="font-size:0.8rem; color:var(--text-muted);" id="pmAcc">የሂሳብ ቁጥር</div>
+                    <strong style="color:#ba68c8;">CBE Bank</strong>
+                    <div style="margin-top:4px;"><span id="txt-lbl-acc">Account Number</span>: <strong>1000377773679</strong></div>
                 </div>
-                <div style="font-weight:600;">1000298742288</div>
+                <span class="copy-btn-badge" id="btn-copy-2">Copy</span>
             </div>
 
-            <div class="payment-row">
-                <div>
-                    <strong style="color: var(--accent-color);" id="pmCashTitle">ጥሬ ገንዘብ / ካርድ</strong>
-                    <div style="font-size:0.8rem; color:var(--text-muted);" id="pmCounter">በካሸር ወይም በጠረጴዛው ላይ</div>
-                </div>
-                <div style="font-weight:600;" id="pmAccepted">ይቀበላሉ</div>
+            <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border-color); padding:10px; border-radius:10px;">
+                <strong id="txt-lbl-cash">Cash / Card</strong>
+                <div style="margin-top:4px;" id="txt-lbl-counter">At Counter or Table</div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Feedback Modal -->
-    <div class="modal-overlay" id="feedbackModal" onclick="closeModalOnOverlay(event, 'feedbackModal')">
-        <div class="modal-card">
-            <button class="modal-close" onclick="toggleFeedbackModal()">&#10005;</button>
-            <h3 style="color: var(--accent-color); text-align: center; margin-bottom: 5px;" id="fmTitle">አስተያየትዎ</h3>
-            <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center;" id="fmSub">አገልግሎታችንን ይመዝኑ እና ሀሳብዎን ያጋሩ</p>
+<!-- Feedback Modal -->
+<div class="modal-overlay" id="feedbackModal">
+    <div class="modal-card">
+        <button class="modal-close" onclick="toggleFeedbackModal()">&#10005;</button>
+        <h3 style="color: var(--accent-color);" id="txt-modal-fb-title">Your Feedback</h3>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;" id="txt-modal-fb-sub">Rate your visit and share your thoughts</p>
 
-            <div class="star-rating" id="starRating">
-                <span class="star" onclick="setRating(1)">&#9733;</span>
-                <span class="star" onclick="setRating(2)">&#9733;</span>
-                <span class="star" onclick="setRating(3)">&#9733;</span>
-                <span class="star" onclick="setRating(4)">&#9733;</span>
-                <span class="star" onclick="setRating(5)">&#9733;</span>
-            </div>
-
-            <textarea class="feedback-textarea" id="feedbackComment" placeholder="አስተያየትዎን ወይም ሀሳብዎን እዚህ ይፃፉ..."></textarea>
-            <button class="submit-btn" id="fmSubmitBtn" onclick="submitFeedback()">አስተያየት ላክ</button>
+        <div class="star-rating">
+            <span class="star" onclick="setRating(1)">★</span>
+            <span class="star" onclick="setRating(2)">★</span>
+            <span class="star" onclick="setRating(3)">★</span>
+            <span class="star" onclick="setRating(4)">★</span>
+            <span class="star" onclick="setRating(5)">★</span>
         </div>
-    </div> 
+
+        <textarea id="feedbackComment" placeholder="Write your comments or recommendations..." style="width:100%; height:80px; background:rgba(255,255,255,0.03); border:1px solid var(--border-color); border-radius:10px; padding:10px; color:#fff; resize:none; margin-bottom:10px; font-size:0.85rem;"></textarea>
+
+        <button class="submit-btn" id="btn-submit-fb" onclick="submitFeedback()">Send Feedback</button>
+    </div>
+</div>
 
 <script>
     const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSiyRA3eEU5x_uY_Isp_935li1VX4d39-UC649B8mOdNjz2czWvf7IxVUhUSeP_-32s0WTFhIZilSMJ/pub?output=csv";
-    
-    // Config Telegram credentials (Use back-end proxy for production security)
     const TELEGRAM_BOT_TOKEN = "8947029118:AAFSWrtOKcW2MrsTJ38v3Hsck59EsqtUAbU";
     const TELEGRAM_CHAT_ID = "6222942056";
 
     let globalMenuData = [];
     let selectedRating = 0;
-    let currentLanguage = 'am';
-    let currentActiveCategory = 'all';
+    let currentLang = 'en';
+    let currentCategory = 'all';
+    let cart = {};
 
     const translations = {
-        am: {
-            langToggle: "🇬🇧 English",
-            subHeaderTitle: "የዲጂታል ሜኑ አገልግሎት",
-            paymentTitle: "የክፍያ አማራጮች",
-            badgeInfo: "መረጃ",
-            fbTitle: "ቆይታዎ እንዴት ነበር?",
-            fbSub: "የኤሉ ካፌን አገልግሎት ከፍ ለማድረግ ሀሳብዎን ያጋሩ",
-            fbBtn: "አስተያየትዎን ይስጡን",
-            warnHeading: "ያልበሰሉ ምግቦች ማሳሰቢያ፡",
-            warnBody: `"ያልበሰሉ ወይም በደንብ ያልተጠበሱ ሥጋዎች፣ የባህር ምግቦች ወይም እንቁላሎችን መመገብ ለምግብ ወለድ በሽታዎች ሊያጋልጥ ይችላል።"`,
-            injeraHeading: "ስለ እንጀራ መረጃ፡",
-            injeraBody: `"ኢትዮጵያውያን ለሺህ ዓመታት እንጀራን እንደ ዋና ምግብ ሲጠቀሙ ቆይተዋል። ከጤፍ ዱቄት የሚዘጋጅ ሲሆን፣ እንደ ሳህን እና መመገቢያ ቁሳቁስም ያገለግላል።"`,
-            vatNotice: "ዋጋዎች ሰርቪስ ቻርጅ እና ቫትን ያካተቱ ናቸው።",
-            devNotice: "የሜኑ ዲዛይን እና ሶፍትዌር ስራ፡",
-            pmHeading: "የክፍያ አማራጮች",
-            pmPhone: "ስልክ ቁጥር",
-            pmAcc: "የሂሳብ ቁጥር",
-            pmCashTitle: "ጥሬ ገንዘብ / ካርድ",
-            pmCounter: "በካሸር ወይም በጠረጴዛው ላይ",
-            pmAccepted: "ይቀበላሉ",
-            fmTitle: "አስተያየትዎ",
-            fmSub: "አገልግሎታችንን ይመዝኑ እና ሀሳብዎን ያጋሩ",
-            fmPlaceholder: "አስተያየትዎን ወይም ሀሳብዎን እዚህ ይፃፉ...",
-            fmSubmitBtn: "አስተያየት ላክ",
-            tabs: {
-                "all": "ሁሉም",
-                "ባህላዊ ምግቦች": "ባህላዊ ምግቦች",
-                "ቁርስ": "ቁርስ",
-                "ትኩስ": "ትኩስ",
-                "ለስላሳ መጠጦች": "ለስላሳ መጠጦች"
-            }
-        },
         en: {
-            langToggle: "🇪🇹 አማርኛ",
-            subHeaderTitle: "Premium Digital Menu",
-            paymentTitle: "Payment Options",
+            subhead: "Premium Digital Menu",
+            paymentsTitle: "Accepted Payments",
             badgeInfo: "Info",
-            fbTitle: "How was your visit?",
-            fbSub: "Share your feedback to help us improve Elu Coffee House",
-            fbBtn: "Give Feedback",
-            warnHeading: "Consuming raw or undercooked meats warning:",
-            warnBody: `"Consuming raw or undercooked meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness, especially if you have certain medical conditions."`,
-            injeraHeading: "Injera Information:",
-            injeraBody: `"For thousands of years, Ethiopians make traditional bread called 'injera' it is sourdough risen flat bread with a unique, slightly spongy texture. Traditionally made out of teff flour. When eating an Ethiopian meal injera serves both as your platter and utensil."`,
-            vatNotice: "Prices include service charge & VAT.",
-            devNotice: "Menu design & functionality by:",
-            pmHeading: "Payment Options",
-            pmPhone: "Phone Number",
-            pmAcc: "Account Number",
-            pmCashTitle: "Cash / Card",
-            pmCounter: "At Counter or Table",
-            pmAccepted: "Accepted",
-            fmTitle: "Your Feedback",
-            fmSub: "Rate your visit and share your thoughts",
-            fmPlaceholder: "Write your comments or recommendations...",
-            fmSubmitBtn: "Send Feedback",
-            tabs: {
-                "all": "All Items",
-                "ባህላዊ ምግቦች": "Cultural Foods",
-                "ቁርስ": "Breakfast",
-                "ትኩስ": "Hot Beverages",
-                "ለስላሳ መጠጦች": "Soft Drinks"
-            }
+            fbTitle: "How was your experience?",
+            fbSub: "Help us improve Nehase 7 Fresh Milk",
+            btnFb: "Leave Feedback",
+            vat: "Prices include service charge & VAT.",
+            modalPayTitle: "Payment Options (Zelalem Abera Shanika)",
+            lblPhone: "Phone Number",
+            lblAcc: "Account Number",
+            lblCash: "Cash / Card",
+            lblCounter: "At Counter or Table",
+            modalFbTitle: "Your Feedback",
+            modalFbSub: "Rate your visit and share your thoughts",
+            phComment: "Write your comments or recommendations...",
+            btnSubmitFb: "Send Feedback",
+            btnSending: "Sending...",
+            categories: {
+                all: "All Items",
+                carbohydrate: "Carbohydrate",
+                protein: "Protein",
+                protein_shake: "Protein Shake",
+                calcium: "Calcium",
+                vitamin: "Vitamin"
+            },
+            viewCart: "View Order",
+            cartTitle: "Your Order",
+            totalLbl: "Total Price:",
+            phTable: "Table Number / Room",
+            phPhone: "Phone Number (Optional)",
+            btnPlaceOrder: "Place Order via Telegram",
+            msgSelectRating: "Please select a star rating!",
+            msgSuccess: "Thank you! Your feedback has been sent.",
+            msgOrderSuccess: "Your order has been submitted successfully!",
+            msgOrderErr: "Fill in table number and ensure your cart has items.",
+            msgError: "Failed to process request.",
+            msgNetworkErr: "Network error occurred.",
+            loadErr: "Error loading live menu data.",
+            copiedToast: "Copied to clipboard!"
+        },
+        am: {
+            subhead: "ፕሪሚየም ዲጂታል ሜኑ",
+            paymentsTitle: "የክፍያ አማራጮች",
+            badgeInfo: "መረጃ",
+            fbTitle: "አገልግሎታችን እንዴት ነበረ?",
+            fbSub: "ነሐሴ 7 ፍሬሽ ሚልክን ለማሻሻል ያግዙን",
+            btnFb: "አስተያየት ይስጡ",
+            vat: "ዋጋው የአገልግሎት ክፍያ እና ቫትን ያካትታል።",
+            modalPayTitle: "የክፍያ አማራጮች (ዘላለም አበራ ሻኒቃ)",
+            lblPhone: "ስልክ ቁጥር",
+            lblAcc: "የሂሳብ ቁጥር",
+            lblCash: "በካሽ / በካርድ",
+            lblCounter: "በካውንተር ወይም በጠረጴዛ",
+            modalFbTitle: "የእርስዎ አስተያየት",
+            modalFbSub: "የነበሮትን ቆይታ ደረጃ ይስጡ እና አስተያየትዎን ያጋሩ",
+            phComment: "አስተያየትዎ ወይም አስተያየትዎ እዚህ ይጻፉ...",
+            btnSubmitFb: "አስተያየት ላክ",
+            btnSending: "እየላከ ነው...",
+            categories: {
+                all: "ሁሉም",
+                carbohydrate: "ካርቦሃይድሬት",
+                protein: "ፕሮቲን",
+                protein_shake: "ፕሮቲን ሼክ",
+                calcium: "ካልሲየም",
+                vitamin: "ቫይታሚን"
+            },
+            viewCart: "ትዕዛዝ ይመልከቱ",
+            cartTitle: "የእርስዎ ትዕዛዝ",
+            totalLbl: "ጠቅላላ ዋጋ:",
+            phTable: "የጠረጴዛ ቁጥር",
+            phPhone: "ስልክ ቁጥር (ከተፈለገ)",
+            btnPlaceOrder: "በትዕዛዝ ላክ (በቴሌግራም)",
+            msgSelectRating: "እባክዎን የኮከብ ደረጃ ይምረጡ!",
+            msgSuccess: "እናመሰግናለን! አስተያየትዎ በተሳካ ሁኔታ ተልኳል።",
+            msgOrderSuccess: "ትዕዛዝዎ በተሳካ ሁኔታ ተልኳል!",
+            msgOrderErr: "እባክዎን የጠረጴዛ ቁጥር ያስገቡ እና ዕቃ መምረጥዎን ያረጋግጡ።",
+            msgError: "ተግባሩን ማከናወን አልተቻለም።",
+            msgNetworkErr: "የኔትወርክ ችግር አጋጥሟል።",
+            loadErr: "የሜኑ መረጃ መጫን አልተቻለም።",
+            copiedToast: "ተቀድቷል!"
         }
     };
 
-    function toggleLanguage() {
-        currentLanguage = (currentLanguage === 'am') ? 'en' : 'am';
-        applyTranslations();
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        document.getElementById('btn-am').classList.toggle('active', lang === 'am');
+        
+        updateUIStaticText();
+        renderCategories();
+        renderMenu();
+        updateCartUI();
     }
 
-    function applyTranslations() {
-        const t = translations[currentLanguage];
-        
-        document.getElementById('langToggleBtn').innerText = t.langToggle;
-        document.getElementById('subHeaderTitle').innerText = t.subHeaderTitle;
-        document.getElementById('paymentTitle').innerText = t.paymentTitle;
-        document.getElementById('badgeInfo').innerText = t.badgeInfo;
-        document.getElementById('fbTitle').innerText = t.fbTitle;
-        document.getElementById('fbSub').innerText = t.fbSub;
-        document.getElementById('fbBtn').innerText = t.fbBtn;
-        document.getElementById('warnHeading').innerText = t.warnHeading;
-        document.getElementById('warnBody').innerText = t.warnBody;
-        document.getElementById('injeraHeading').innerText = t.injeraHeading;
-        document.getElementById('injeraBody').innerText = t.injeraBody;
-        document.getElementById('vatNotice').innerText = t.vatNotice;
-        document.getElementById('devNotice').innerText = t.devNotice;
-        
-        document.getElementById('pmHeading').innerText = t.pmHeading;
-        document.getElementById('pmPhone').innerText = t.pmPhone;
-        document.getElementById('pmAcc').innerText = t.pmAcc;
-        document.getElementById('pmCashTitle').innerText = t.pmCashTitle;
-        document.getElementById('pmCounter').innerText = t.pmCounter;
-        document.getElementById('pmAccepted').innerText = t.pmAccepted;
-        
-        document.getElementById('fmTitle').innerText = t.fmTitle;
-        document.getElementById('fmSub').innerText = t.fmSub;
-        document.getElementById('feedbackComment').placeholder = t.fmPlaceholder;
-        document.getElementById('fmSubmitBtn').innerText = t.fmSubmitBtn;
+    function updateUIStaticText() {
+        const t = translations[currentLang];
+        document.getElementById('txt-subhead').innerText = t.subhead;
+        document.getElementById('txt-payments-title').innerText = t.paymentsTitle;
+        document.getElementById('txt-badge-info').innerText = t.badgeInfo;
+        document.getElementById('txt-fb-title').innerText = t.fbTitle;
+        document.getElementById('txt-fb-sub').innerText = t.fbSub;
+        document.getElementById('btn-fb').innerText = t.btnFb;
+        document.getElementById('txt-vat').innerText = t.vat;
+        document.getElementById('txt-modal-pay-title').innerText = t.modalPayTitle;
+        document.getElementById('txt-lbl-phone').innerText = t.lblPhone;
+        document.getElementById('txt-lbl-acc').innerText = t.lblAcc;
+        document.getElementById('txt-lbl-cash').innerText = t.lblCash;
+        document.getElementById('txt-lbl-counter').innerText = t.lblCounter;
+        document.getElementById('txt-modal-fb-title').innerText = t.modalFbTitle;
+        document.getElementById('txt-modal-fb-sub').innerText = t.modalFbSub;
+        document.getElementById('feedbackComment').placeholder = t.phComment;
+        document.getElementById('btn-submit-fb').innerText = t.btnSubmitFb;
 
-        const tabs = document.querySelectorAll('.categories .tab');
-        tabs.forEach(tab => {
-            const catKey = tab.getAttribute('data-cat');
-            if (t.tabs[catKey]) {
-                tab.innerText = t.tabs[catKey];
-            }
+        document.getElementById('txt-view-cart').innerText = t.viewCart;
+        document.getElementById('txt-cart-title').innerText = t.cartTitle;
+        document.getElementById('txt-total-lbl').innerText = t.totalLbl;
+        document.getElementById('orderTable').placeholder = t.phTable;
+        document.getElementById('orderPhone').placeholder = t.phPhone;
+        document.getElementById('btn-submit-order').innerText = t.btnPlaceOrder;
+    }
+
+    function copyToClipboard(text, label) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(`${label} (${text}) ${translations[currentLang].copiedToast}`);
+        }).catch(() => {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showToast(`${label} ${translations[currentLang].copiedToast}`);
         });
-
-        filterMenu(currentActiveCategory, document.querySelector(`.tab[data-cat="${currentActiveCategory}"]`));
     }
 
-    // Robust CSV parser supporting commas inside quoted text
-    function parseCSVRow(text) {
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.innerText = message;
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 2000);
+    }
+
+    function renderCategories() {
+        const catContainer = document.getElementById('categories-wrapper');
+        const catMap = translations[currentLang].categories;
+        const keys = ['all', 'carbohydrate', 'protein', 'protein_shake', 'calcium', 'vitamin'];
+        
+        catContainer.innerHTML = keys.map(key => {
+            const label = catMap[key] || key;
+            const activeClass = (key === currentCategory) ? 'active' : '';
+            return `<button class="tab ${activeClass}" onclick="filterMenu('${key}', this)">${label}</button>`;
+        }).join('');
+    }
+
+    function filterMenu(category, element) {
+        currentCategory = category;
+        document.querySelectorAll('.categories .tab').forEach(el => el.classList.remove('active'));
+        if (element) element.classList.add('active');
+        renderMenu();
+    }
+
+    function parseCSVLine(line) {
         const result = [];
-        let cell = '';
+        let start = 0;
         let inQuotes = false;
         
-        for (let i = 0; i < text.length; i++) {
-            const char = text[i];
-            if (char === '"') {
+        for (let i = 0; i < line.length; i++) {
+            if (line[i] === '"') {
                 inQuotes = !inQuotes;
-            } else if (char === ',' && !inQuotes) {
-                result.push(cell.trim().replace(/^"|"$/g, ''));
-                cell = '';
-            } else {
-                cell += char;
+            } else if (line[i] === ',' && !inQuotes) {
+                let field = line.substring(start, i).trim();
+                if (field.startsWith('"') && field.endsWith('"')) {
+                    field = field.substring(1, field.length - 1).replace(/""/g, '"');
+                }
+                result.push(field);
+                start = i + 1;
             }
         }
-        result.push(cell.trim().replace(/^"|"$/g, ''));
+        let lastField = line.substring(start).trim();
+        if (lastField.startsWith('"') && lastField.endsWith('"')) {
+            lastField = lastField.substring(1, lastField.length - 1).replace(/""/g, '"');
+        }
+        result.push(lastField);
         return result;
     }
 
     async function loadMenuFromSheet() {
         try {
             const response = await fetch(SHEET_URL);
+            if (!response.ok) throw new Error("HTTP error " + response.status);
             const data = await response.text();
             
-            const rows = data.split("\n").filter(row => row.trim() !== "").slice(1);
-            globalMenuData = rows.map(row => {
-                const columns = parseCSVRow(row);
-                return {
-                    name: columns[0] || '',
-                    category: columns[1] || '',
-                    price: columns[2] || '',
-                    img: columns[3] || 'https://via.placeholder.com/300x200?text=No+Image',
-                    desc: columns[4] || ''
-                };
-            }).filter(item => item.name);
+            const rows = data.replace(/\r/g, '').split('\n').filter(r => r.trim() !== '');
+            if (rows.length <= 1) return;
 
-            applyTranslations();
+            globalMenuData = rows.slice(1).map(row => {
+                const columns = parseCSVLine(row);
+                return {
+                    name: columns[0] ? columns[0].trim() : '',
+                    category: columns[1] ? columns[1].trim().toLowerCase().replace(/\s+/g, '_') : 'all',
+                    price: columns[2] ? columns[2].trim() : '0 ETB',
+                    img: columns[3] ? columns[3].trim() : 'https://via.placeholder.com/150',
+                    desc: columns[4] ? columns[4].trim() : '',
+                    name_am: columns[5] ? columns[5].trim() : (columns[0] ? columns[0].trim() : ''),
+                    desc_am: columns[6] ? columns[6].trim() : (columns[4] ? columns[4].trim() : '')
+                };
+            }).filter(item => item.name.length > 0);
+
+            setLanguage('en');
         } catch (error) {
-            document.getElementById('menu-list').innerHTML = "<p style='color:#ff6b6b; text-align:center;'>Unable to load menu data. Please try again later.</p>";
+            console.error("Sheet Load Error:", error);
+            document.getElementById('menu-list').innerHTML = `<p style='color:red; text-align:center;'>${translations[currentLang].loadErr}</p>`;
         }
     }
 
-    function renderMenu(items) {
+    function parsePrice(priceStr) {
+        if (!priceStr) return 0;
+        const num = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+        return isNaN(num) ? 0 : num;
+    }
+
+    function renderMenu() {
         const menuContainer = document.getElementById('menu-list');
         menuContainer.innerHTML = '';
         
-        if (items.length === 0) {
-            menuContainer.innerHTML = `<p style="text-align:center; color: var(--text-muted); padding: 20px;">No items available in this category.</p>`;
+        const filteredItems = (currentCategory === 'all') 
+            ? globalMenuData 
+            : globalMenuData.filter(item => item.category === currentCategory);
+
+        if (filteredItems.length === 0) {
+            menuContainer.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:20px;">No items found.</p>`;
             return;
         }
 
-        items.forEach((item, index) => {
+        filteredItems.forEach((item) => {
+            const name = (currentLang === 'am' && item.name_am) ? item.name_am : item.name;
+            const desc = (currentLang === 'am' && item.desc_am) ? item.desc_am : item.desc;
+            const itemQty = cart[item.name] ? cart[item.name].qty : 0;
+            const escapedName = item.name.replace(/'/g, "\\'");
+
+            const actionMarkup = itemQty > 0 ? `
+                <div class="cart-btn-ctrl">
+                    <button class="qty-btn" onclick="updateCartQuantity('${escapedName}', -1)">-</button>
+                    <span style="font-weight:600; font-size:0.85rem;">${itemQty}</span>
+                    <button class="qty-btn" onclick="updateCartQuantity('${escapedName}', 1)">+</button>
+                </div>
+            ` : `
+                <button class="add-cart-btn" onclick="updateCartQuantity('${escapedName}', 1)">+ Add to Order</button>
+            `;
+
             const itemHTML = `
-                <div class="menu-item" style="animation-delay: ${index * 0.03}s">
+                <div class="menu-item">
                     <div class="item-image-container">
-                        <img src="${item.img}" alt="${item.name}" class="item-image" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                        <img src="${item.img}" alt="${name}" class="item-image" loading="lazy" onerror="this.src='https://via.placeholder.com/150';">
                     </div>
                     <div class="item-details">
                         <div class="item-header">
-                            <div class="item-title">${item.name}</div>
-                            <div class="item-price">${item.price}</div>
+                            <span class="item-title">${name}</span>
+                            <span class="item-price">${item.price}</span>
                         </div>
-                        <div class="item-description">${item.desc}</div>
+                        <p class="item-description">${desc}</p>
+                        <div class="item-action-row">
+                            ${actionMarkup}
+                        </div>
                     </div>
                 </div>
             `;
-            menuContainer.innerHTML += itemHTML;
+            menuContainer.insertAdjacentHTML('beforeend', itemHTML);
         });
     }
 
-    function filterMenu(category, clickedTab) {
-        currentActiveCategory = category;
-        const tabs = document.querySelectorAll('.tab');
-        tabs.forEach(tab => tab.classList.remove('active'));
-        if (clickedTab) clickedTab.classList.add('active');
+    function updateCartQuantity(itemName, delta) {
+        const itemObj = globalMenuData.find(i => i.name === itemName);
+        if (!itemObj) return;
 
-        if (category === 'all') {
-            renderMenu(globalMenuData);
-        } else {
-            const filtered = globalMenuData.filter(item => item.category === category);
-            renderMenu(filtered);
+        if (!cart[itemName]) {
+            cart[itemName] = {
+                data: itemObj,
+                qty: 0
+            };
         }
+
+        cart[itemName].qty += delta;
+
+        if (cart[itemName].qty <= 0) {
+            delete cart[itemName];
+        }
+
+        renderMenu();
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const cartBar = document.getElementById('cartBar');
+        const cartCountBadge = document.getElementById('cartCountBadge');
+        const cartTotalHeader = document.getElementById('cartTotalHeader');
+        const cartItemsList = document.getElementById('cartItemsList');
+        const cartGrandTotal = document.getElementById('cartGrandTotal');
+
+        let totalQty = 0;
+        let totalPrice = 0;
+        cartItemsList.innerHTML = '';
+
+        Object.keys(cart).forEach(name => {
+            const entry = cart[name];
+            const itemPrice = parsePrice(entry.data.price);
+            const lineTotal = itemPrice * entry.qty;
+            
+            totalQty += entry.qty;
+            totalPrice += lineTotal;
+
+            const displayName = (currentLang === 'am' && entry.data.name_am) ? entry.data.name_am : entry.data.name;
+            const escapedName = name.replace(/'/g, "\\'");
+
+            cartItemsList.insertAdjacentHTML('beforeend', `
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.85rem;">
+                    <div>
+                        <div style="font-weight:600;">${displayName}</div>
+                        <div style="color:var(--text-muted); font-size:0.75rem;">${entry.qty} x ${entry.data.price}</div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-weight:700; color:var(--accent-color);">${lineTotal} ETB</span>
+                        <div class="cart-btn-ctrl" style="padding:0px 6px;">
+                            <button class="qty-btn" onclick="updateCartQuantity('${escapedName}', -1)">-</button>
+                            <span style="font-size:0.8rem;">${entry.qty}</span>
+                            <button class="qty-btn" onclick="updateCartQuantity('${escapedName}', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            `);
+        });
+
+        cartCountBadge.innerText = totalQty;
+        cartTotalHeader.innerText = `${totalPrice} ETB`;
+        cartGrandTotal.innerText = `${totalPrice} ETB`;
+
+        if (totalQty > 0) {
+            cartBar.style.display = 'flex';
+        } else {
+            cartBar.style.display = 'none';
+            document.getElementById('cartModal').style.display = 'none';
+        }
+    }
+
+    function toggleCartModal() {
+        const modal = document.getElementById('cartModal');
+        modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
     }
 
     function togglePaymentModal() {
@@ -752,73 +957,130 @@
         modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    function closeModalOnOverlay(event, modalId) {
-        if (event.target.id === modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-    }
-
     function setRating(rating) {
         selectedRating = rating;
-        const stars = document.querySelectorAll('.star');
+        const stars = document.querySelectorAll('.star-rating .star');
         stars.forEach((star, idx) => {
-            star.classList.toggle('selected', idx < rating);
+            if (idx < rating) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
         });
     }
 
-    async function submitFeedback() {
-        if (selectedRating === 0) {
-            alert(currentLanguage === 'am' ? "እባክዎን የኮከብ ደረጃ ይምረጡ!" : "Please select a star rating!");
+    async function submitOrder() {
+        const table = document.getElementById('orderTable').value.trim();
+        const phone = document.getElementById('orderPhone').value.trim();
+        const paymentMethod = document.getElementById('orderPaymentMethod').value;
+        const t = translations[currentLang];
+
+        if (!table || Object.keys(cart).length === 0) {
+            alert(t.msgOrderErr);
             return;
         }
 
-        const commentInput = document.getElementById('feedbackComment');
-        const comment = commentInput.value.trim();
-        const submitBtn = document.getElementById('fmSubmitBtn');
+        const btn = document.getElementById('btn-submit-order');
+        btn.innerText = t.btnSending;
+        btn.disabled = true;
 
-        const starsText = "⭐".repeat(selectedRating);
-        let message = `<b>NEW FEEDBACK - ELU-COFFEE-HOUSE</b>\n\n`;
-        message += `<b>Rating:</b> ${starsText} (${selectedRating}/5)\n`;
-        if (comment) {
-            message += `<b>Comment:</b> ${comment}\n`;
-        }
+        let orderItemsStr = '';
+        let totalPrice = 0;
 
-        const originalBtnText = submitBtn.innerText;
-        submitBtn.innerText = currentLanguage === 'am' ? "እየላከ ነው..." : "Sending...";
-        submitBtn.disabled = true;
+        Object.keys(cart).forEach((name, index) => {
+            const entry = cart[name];
+            const lineTotal = parsePrice(entry.data.price) * entry.qty;
+            totalPrice += lineTotal;
+            orderItemsStr += `${index + 1}. ${name} x${entry.qty} - ${lineTotal} ETB\n`;
+        });
+
+        const textMessage = `🛒 *NEW ORDER - Nehase 7 Fresh Milk*\n\n` +
+            `📍 *Table/Room:* ${table}\n` +
+            `📞 *Phone:* ${phone || 'Not provided'}\n` +
+            `💳 *Payment:* ${paymentMethod}\n\n` +
+            `📝 *Items Ordered:*\n${orderItemsStr}\n` +
+            `💰 *Grand Total:* ${totalPrice} ETB`;
 
         try {
-            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: "HTML"
+                    text: textMessage,
+                    parse_mode: 'Markdown'
                 })
             });
 
-            const data = await response.json();
-
-            if (data.ok) {
-                alert(currentLanguage === 'am' ? "እናመሰግናለን! አስተያየትዎ ተልኳል።" : "Thank you! Your feedback has been sent.");
-                toggleFeedbackModal();
-                selectedRating = 0;
-                setRating(0);
-                commentInput.value = '';
+            if (res.ok) {
+                alert(t.msgOrderSuccess);
+                cart = {};
+                document.getElementById('orderTable').value = '';
+                document.getElementById('orderPhone').value = '';
+                updateCartUI();
+                toggleCartModal();
             } else {
-                throw new Error("Telegram API delivery failed.");
+                alert(t.msgError);
             }
-        } catch (error) {
-            console.error("Submission Error:", error);
-            alert(currentLanguage === 'am' ? "አስተያየት መላክ አልተቻለም። እባክዎ የበይነመረብ ግንኙነትዎን ያረጋግጡ።" : "Failed to send feedback. Please check your connection.");
+        } catch (err) {
+            console.error(err);
+            alert(t.msgNetworkErr);
         } finally {
-            submitBtn.innerText = originalBtnText;
-            submitBtn.disabled = false;
+            btn.innerText = t.btnPlaceOrder;
+            btn.disabled = false;
         }
-    } 
+    }
 
-    loadMenuFromSheet();
+    async function submitFeedback() {
+        const comment = document.getElementById('feedbackComment').value.trim();
+        const t = translations[currentLang];
+
+        if (selectedRating === 0) {
+            alert(t.msgSelectRating);
+            return;
+        }
+
+        const btn = document.getElementById('btn-submit-fb');
+        btn.innerText = t.btnSending;
+        btn.disabled = true;
+
+        const starsStr = "★".repeat(selectedRating) + "☆".repeat(5 - selectedRating);
+        const textMessage = `💬 *NEW FEEDBACK - Nehase 7 Fresh Milk*\n\n` +
+            `⭐ *Rating:* ${starsStr} (${selectedRating}/5)\n` +
+            `📝 *Comment:* ${comment || 'No comment provided.'}`;
+
+        try {
+            const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: textMessage,
+                    parse_mode: 'Markdown'
+                })
+            });
+
+            if (res.ok) {
+                alert(t.msgSuccess);
+                setRating(0);
+                document.getElementById('feedbackComment').value = '';
+                toggleFeedbackModal();
+            } else {
+                alert(t.msgError);
+            }
+        } catch (err) {
+            console.error(err);
+            alert(t.msgNetworkErr);
+        } finally {
+            btn.innerText = t.btnSubmitFb;
+            btn.disabled = false;
+        }
+    }
+
+    // Initialize application on load
+    window.addEventListener('DOMContentLoaded', () => {
+        loadMenuFromSheet();
+    });
 </script>
 </body>
 </html>
